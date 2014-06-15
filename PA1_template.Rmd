@@ -6,11 +6,8 @@
 For this analysis we will need the `ggplot2` and `dplyr` packages. The first one will be used for plotting and second package will be used to transform the data when necessary.
 
 
-```{r, echo = FALSE, message = FALSE}
-set.seed(1)
-```
-
 ```{r, message = FALSE}
+set.seed(1) ## for reproducibility
 library(ggplot2)
 library(dplyr)
 ```

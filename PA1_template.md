@@ -7,9 +7,8 @@ For this analysis we will need the `ggplot2` and `dplyr` packages. The first one
 
 
 
-
-
 ```r
+set.seed(1) ## for reproducibility
 library(ggplot2)
 library(dplyr)
 ```
@@ -92,7 +91,7 @@ With the histogram we can see that most of the people take approximatively 10000
   theme_bw()
 ```
 
-![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8.png) 
+![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7.png) 
 
 There is no difference between the median number of steps per day and average number of steps. This result was predictable since the distribution of the total number of step is quite symetric (see histogram).
 
@@ -165,7 +164,7 @@ The graph below shows the activity pattern by interval with a peak around the in
   theme_bw()
 ```
 
-![plot of chunk unnamed-chunk-13](figure/unnamed-chunk-13.png) 
+![plot of chunk unnamed-chunk-12](figure/unnamed-chunk-12.png) 
 
 # Imputing missing values
 
@@ -280,7 +279,7 @@ ggplot(activitydayfilled, aes(totalsteps)) +
   theme_bw()
 ```
 
-![plot of chunk unnamed-chunk-21](figure/unnamed-chunk-21.png) 
+![plot of chunk unnamed-chunk-20](figure/unnamed-chunk-20.png) 
 
 The histogram shows a difference at the tail of the distribution and the density plot below highlight this difference between the original data and filled one.
 In fact, the graph in blue (the filled data) shows a heavier tail than the graph in red (original data). This difference doesn't affect the median but the mean which is more sensitive to distributions tails differ signifcantly.
@@ -308,7 +307,7 @@ ggplot(activitydayfilled, aes(totalsteps)) +
     theme_bw()
 ```
 
-![plot of chunk unnamed-chunk-22](figure/unnamed-chunk-22.png) 
+![plot of chunk unnamed-chunk-21](figure/unnamed-chunk-21.png) 
 
 # Are there differences in activity patterns between weekdays and weekends?
 
@@ -358,7 +357,7 @@ labs(x = "Interval", y = "Average steps") +
 theme_bw()
 ```
 
-![plot of chunk unnamed-chunk-26](figure/unnamed-chunk-26.png) 
+![plot of chunk unnamed-chunk-25](figure/unnamed-chunk-25.png) 
 
 
 Here are the information of the R session for this analysis 
