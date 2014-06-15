@@ -3,7 +3,8 @@
 
 # Loading and preprocessing the data
 
-For this analysis we will need the `ggplot2` and `dplyr` packages. The first one will be used for plotting and second to transform the data when necessary.
+For this analysis we will need the `ggplot2` and `dplyr` packages. The first one will be used for plotting and second package will be used to transform the data when necessary.
+
 
 
 
@@ -217,11 +218,11 @@ sample_n(toimpute, 5)
 ## Source: local data frame [5 x 2]
 ## 
 ##              wdmin steps
-## 1155   Thursday100     0
-## 1831 Wednesday1715    59
-## 407     Monday1835    32
-## 1809 Wednesday1530     8
-## 1901 Wednesday2235     0
+## 536      Monday635     0
+## 750   Saturday2240     0
+## 1154    Thursday10     0
+## 1829 Wednesday1705     0
+## 406     Monday1830    60
 ```
 
 Now we have the data to impute we can merge it to the original data
@@ -389,8 +390,9 @@ sessionInfo()
 ##  [1] assertthat_0.1.0.99 colorspace_1.2-4    digest_0.6.4       
 ##  [4] evaluate_0.5.5      formatR_0.10        grid_3.1.0         
 ##  [7] gtable_0.1.2        htmltools_0.2.4     labeling_0.2       
-## [10] magrittr_1.0.1      MASS_7.3-33         munsell_0.4.2      
-## [13] parallel_3.1.0      plyr_1.8.1          proto_0.3-10       
-## [16] Rcpp_0.11.2         reshape2_1.4        rmarkdown_0.2.46   
-## [19] scales_0.2.4        stringr_0.6.2       tools_3.1.0
+## [10] magrittr_1.0.1      markdown_0.7        MASS_7.3-33        
+## [13] mime_0.1.1          munsell_0.4.2       parallel_3.1.0     
+## [16] plyr_1.8.1          proto_0.3-10        Rcpp_0.11.2        
+## [19] reshape2_1.4        rmarkdown_0.2.46    scales_0.2.4       
+## [22] stringr_0.6.2       tools_3.1.0
 ```

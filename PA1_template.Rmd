@@ -3,7 +3,8 @@
 
 # Loading and preprocessing the data
 
-For this analysis we will need the `ggplot2` and `dplyr` packages. The first one will be used for plotting and second to transform the data when necessary.
+For this analysis we will need the `ggplot2` and `dplyr` packages. The first one will be used for plotting and second package will be used to transform the data when necessary.
+
 
 ```{r, echo = FALSE, message = FALSE}
 set.seed(1)
@@ -101,7 +102,7 @@ And the maximum number of steps is
 
 The graph below shows the activity pattern by interval with a peak around the interval 835 
 
-```{r, fig.height=4, fig.width=7}
+```{r, fig.height=6, fig.width=8}
   ggplot(activity5min, aes(interval, avgsteps)) +
       geom_line(colour = "steelblue") +
       geom_point(x = intervalmax,
