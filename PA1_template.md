@@ -179,7 +179,7 @@ sum(!complete.cases(activity))
 ## [1] 2304
 ```
 
-All the missing data are in  fact in the `steps` variable 
+All the missing data are in fact in the `steps` variable 
 
 
 ```r
@@ -191,9 +191,9 @@ sum(is.na(activity$steps))
 ```
 
 To replace the missing values in the `steps` variable we will replace each missing data by the median data for corresponding the day of the week (Monday, Tuesday, etc.) at the interval considered. For example if the data is missing a monday at the interval 900 we will use the median value (discarding missing value) of all monday at the interval 900.
-In this exercice the median is prefered to the average because it is more robust to outlier.
+In this exercise, the median is prefered to the average because it is more robust to outlier.
 
-We will first create an index of weekday-interval and split the data in two parts : missing and non missing data
+To easily impute the missing value using the scheme proposed, we will first create an index of weekday-interval and split the data in two parts : missing and non missing data
 
 
 ```r
@@ -208,8 +208,8 @@ The next step is to compute the median per weekday-interval
 
 ```r
 toimpute <- activity %>%
-    group_by(wdmin) %>%
-	summarise(steps = median(steps, na.rm = TRUE))
+  group_by(wdmin) %>%
+  summarise(steps = median(steps, na.rm = TRUE))
 sample_n(toimpute, 5)
 ```
 
@@ -265,18 +265,17 @@ mediansteps = median(totalsteps))
 ##   meansteps mediansteps
 ## 1      9705       10395
 ```
-
 The difference between median and mean is more pronounced with the filled data compared to the original data with missing values. 
 
 
 ```r
 ggplot(activitydayfilled, aes(totalsteps)) +
-    geom_histogram(aes(y = ..density..),
-		   fill = "steelblue",
-		   colour = "white",
-		   binwidth = 3000) +
-  labs(x = "Total steps") +
-  theme_bw()
+  geom_histogram(aes(y = ..density..),
+                 fill = "steelblue",
+                 colour = "white",
+                 binwidth = 3000) +
+                   labs(x = "Total steps") +
+                   theme_bw()
 ```
 
 ![plot of chunk unnamed-chunk-20](figure/unnamed-chunk-20.png) 
@@ -287,24 +286,26 @@ In fact, the graph in blue (the filled data) shows a heavier tail than the graph
 
 ```r
 ggplot(activitydayfilled, aes(totalsteps)) +
-    geom_density(fill = "steelblue",
-    colour = "white",
-    binwidth = 3000,
-    alpha = 0.2) +
-    geom_density(aes(x = totalsteps),
-    fill = "red",
-    colour = "white",
-    binwidth = 3000,
-    alpha = 0.2,
-    data = activityday) +
-    labs(x = "Total steps") +
-    geom_text(x = 275, y = 0.00005,
-              label = "filled",
-              colour = "steelblue") +
-    geom_text(x = 17000, y = 0.00005,
-              label = "original",
-              colour = "red") +
-    theme_bw()
+  geom_density(fill = "steelblue",
+               colour = "white",
+               binwidth = 3000,
+               alpha = 0.2) +
+                 geom_density(aes(x = totalsteps),
+                              fill = "red",
+                              colour = "white",
+                              binwidth = 3000,
+                              alpha = 0.2,
+                              data = activityday) +
+                                labs(x = "Total steps") +
+                                geom_text(x = 275, y = 0.00005,
+                                          label = "filled",
+                                          colour = "steelblue",
+                                          family = "serif") +
+                                            geom_text(x = 17000, y = 0.00005,
+                                                      label = "original",
+                                                      colour = "red",
+                                                      family = "serif") +
+                                                        theme_bw()
 ```
 
 ![plot of chunk unnamed-chunk-21](figure/unnamed-chunk-21.png) 
@@ -341,11 +342,11 @@ With this new variable we can check if there is a difference of activity if we a
 
 ```r
 activitywkd <- activityfilled %>%
-    group_by(weekday, interval) %>%
-	summarise(wkavgsteps = mean(steps))
+  group_by(weekday, interval) %>%
+    summarise(wkavgsteps = mean(steps))
 ```
 
-The graph below highlight a different behavior between activity done in weekday and weekend. There is slightly more activity in the week end and in particular between interval 1000 and 1500.
+The graph below highlights a different behavior between activity done in weekday and weekend. There is slightly more activity in the week end and in particular between interval 1000 and 1500.
 
 
 
@@ -368,30 +369,30 @@ sessionInfo()
 ```
 
 ```
-## R version 3.1.0 Patched (2014-06-15 r65949)
+## R version 3.1.1 Patched (2014-09-07 r66542)
 ## Platform: x86_64-unknown-linux-gnu (64-bit)
 ## 
 ## locale:
-##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
-##  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
-##  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
-##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+##  [1] LC_CTYPE=en_US.utf8       LC_NUMERIC=C             
+##  [3] LC_TIME=en_US.utf8        LC_COLLATE=en_US.utf8    
+##  [5] LC_MONETARY=en_US.utf8    LC_MESSAGES=en_US.utf8   
+##  [7] LC_PAPER=en_US.utf8       LC_NAME=C                
+##  [9] LC_ADDRESS=C              LC_TELEPHONE=C           
+## [11] LC_MEASUREMENT=en_US.utf8 LC_IDENTIFICATION=C      
 ## 
 ## attached base packages:
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] dplyr_0.2.0.99 ggplot2_1.0.0  knitr_1.6     
+## [1] dplyr_0.2.0.9000 ggplot2_1.0.0    knitr_1.6       
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] assertthat_0.1.0.99 colorspace_1.2-4    digest_0.6.4       
-##  [4] evaluate_0.5.5      formatR_0.10        grid_3.1.0         
-##  [7] gtable_0.1.2        htmltools_0.2.4     labeling_0.2       
-## [10] magrittr_1.0.1      markdown_0.7        MASS_7.3-33        
-## [13] mime_0.1.1          munsell_0.4.2       parallel_3.1.0     
+##  [1] assertthat_0.1.0.99 colorspace_1.2-4    DBI_0.3.0.9000     
+##  [4] digest_0.6.4        evaluate_0.5.5      formatR_1.0        
+##  [7] grid_3.1.1          gtable_0.1.2        labeling_0.3       
+## [10] magrittr_1.0.1      markdown_0.7.4      MASS_7.3-34        
+## [13] mime_0.1.2          munsell_0.4.2       parallel_3.1.1     
 ## [16] plyr_1.8.1          proto_0.3-10        Rcpp_0.11.2        
-## [19] reshape2_1.4        rmarkdown_0.2.46    scales_0.2.4       
-## [22] stringr_0.6.2       tools_3.1.0
+## [19] reshape2_1.4        scales_0.2.4        stringr_0.6.2      
+## [22] tools_3.1.1
 ```

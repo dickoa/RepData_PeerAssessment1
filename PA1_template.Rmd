@@ -125,16 +125,16 @@ We have a lot of missing rows in the datasets
 sum(!complete.cases(activity))
 ```
 
-All the missing data are in  fact in the `steps` variable 
+All the missing data are in fact in the `steps` variable 
 
 ```{r}
 sum(is.na(activity$steps))
 ```
 
 To replace the missing values in the `steps` variable we will replace each missing data by the median data for corresponding the day of the week (Monday, Tuesday, etc.) at the interval considered. For example if the data is missing a monday at the interval 900 we will use the median value (discarding missing value) of all monday at the interval 900.
-In this exercice the median is prefered to the average because it is more robust to outlier.
+In this exercise, the median is prefered to the average because it is more robust to outlier.
 
-We will first create an index of weekday-interval and split the data in two parts : missing and non missing data
+To easily impute the missing value using the scheme proposed, we will first create an index of weekday-interval and split the data in two parts : missing and non missing data
 
 ```{r}
 activity$wdmin <- weekdays(activity$date)
@@ -147,8 +147,8 @@ The next step is to compute the median per weekday-interval
 
 ```{r}
 toimpute <- activity %>%
-    group_by(wdmin) %>%
-	summarise(steps = median(steps, na.rm = TRUE))
+  group_by(wdmin) %>%
+  summarise(steps = median(steps, na.rm = TRUE))
 sample_n(toimpute, 5)
 ```
 
@@ -176,17 +176,16 @@ activitydayfilled %>%
 summarise(meansteps = mean(totalsteps),
 mediansteps = median(totalsteps))
 ```
-
 The difference between median and mean is more pronounced with the filled data compared to the original data with missing values. 
 
 ```{r}
 ggplot(activitydayfilled, aes(totalsteps)) +
-    geom_histogram(aes(y = ..density..),
-		   fill = "steelblue",
-		   colour = "white",
-		   binwidth = 3000) +
-  labs(x = "Total steps") +
-  theme_bw()
+  geom_histogram(aes(y = ..density..),
+                 fill = "steelblue",
+                 colour = "white",
+                 binwidth = 3000) +
+                   labs(x = "Total steps") +
+                   theme_bw()
 ```
 
 The histogram shows a difference at the tail of the distribution and the density plot below highlight this difference between the original data and filled one.
@@ -194,24 +193,26 @@ In fact, the graph in blue (the filled data) shows a heavier tail than the graph
 
 ```{r}
 ggplot(activitydayfilled, aes(totalsteps)) +
-    geom_density(fill = "steelblue",
-    colour = "white",
-    binwidth = 3000,
-    alpha = 0.2) +
-    geom_density(aes(x = totalsteps),
-    fill = "red",
-    colour = "white",
-    binwidth = 3000,
-    alpha = 0.2,
-    data = activityday) +
-    labs(x = "Total steps") +
-    geom_text(x = 275, y = 0.00005,
-              label = "filled",
-              colour = "steelblue") +
-    geom_text(x = 17000, y = 0.00005,
-              label = "original",
-              colour = "red") +
-    theme_bw()
+  geom_density(fill = "steelblue",
+               colour = "white",
+               binwidth = 3000,
+               alpha = 0.2) +
+                 geom_density(aes(x = totalsteps),
+                              fill = "red",
+                              colour = "white",
+                              binwidth = 3000,
+                              alpha = 0.2,
+                              data = activityday) +
+                                labs(x = "Total steps") +
+                                geom_text(x = 275, y = 0.00005,
+                                          label = "filled",
+                                          colour = "steelblue",
+                                          family = "serif") +
+                                            geom_text(x = 17000, y = 0.00005,
+                                                      label = "original",
+                                                      colour = "red",
+                                                      family = "serif") +
+                                                        theme_bw()
 ```
 
 # Are there differences in activity patterns between weekdays and weekends?
@@ -237,11 +238,11 @@ With this new variable we can check if there is a difference of activity if we a
 
 ```{r}
 activitywkd <- activityfilled %>%
-    group_by(weekday, interval) %>%
-	summarise(wkavgsteps = mean(steps))
+  group_by(weekday, interval) %>%
+    summarise(wkavgsteps = mean(steps))
 ```
 
-The graph below highlight a different behavior between activity done in weekday and weekend. There is slightly more activity in the week end and in particular between interval 1000 and 1500.
+The graph below highlights a different behavior between activity done in weekday and weekend. There is slightly more activity in the week end and in particular between interval 1000 and 1500.
 
 
 ```{r}
